@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DelishBites - Fresh & Tasty Foods</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092');
+      background-size: cover;
+      background-attachment: fixed;
+      color: #fff;
+    }
+    .nav-link {
+      color: white !important;
+    }
+    .product-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
+      text-align: center;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-dark p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="text-white">DelishBites</h1>
+      <nav>
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home" class="overlay text-center text-light">
+    <div class="container py-5">
+      <h2>Welcome to DelishBites</h2>
+      <p>Your go-to destination for mouth-watering dishes delivered fresh!</p>
+      <button class="btn btn-primary mt-3">Order Now</button>
+    </div>
+  </section>
+
+  <section id="menu" class="overlay">
+    <div class="container">
+      <h2 class="text-center mb-4">Our Menu</h2>
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search for a dish...">
+        </div>
+        <div class="col-md-6">
+          <select id="sortSelect" class="form-select">
+            <option value="">Sort by</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+      </div>
+      <div class="row" id="productList">
+        <div class="col-md-4 mb-4 product-card" data-name="Pizza" data-price="12">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1601924582975-7e670322ad26" class="card-img-top" alt="Pizza">
+            <div class="card-body">
+              <h5 class="card-title">Pepperoni Pizza</h5>
+              <p class="card-text">Hot and cheesy pepperoni pizza. $12</p>
+              <button class="btn btn-success">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 product-card" data-name="Burger" data-price="8">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349" class="card-img-top" alt="Burger">
+            <div class="card-body">
+              <h5 class="card-title">Beef Burger</h5>
+              <p class="card-text">Juicy grilled beef burger. $8</p>
+              <button class="btn btn-success">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4 product-card" data-name="Sushi" data-price="15">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1553621042-f6e147245754" class="card-img-top" alt="Sushi">
+            <div class="card-body">
+              <h5 class="card-title">Salmon Sushi</h5>
+              <p class="card-text">Fresh salmon sushi rolls. $15</p>
+              <button class="btn btn-success">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="overlay text-center">
+    <div class="container py-4">
+      <h2>About Us</h2>
+      <p>DelishBites is committed to bringing you the freshest and tastiest food using premium ingredients prepared by top chefs.</p>
+      <div class="ratio ratio-16x9 mt-3">
+        <iframe src="https://www.youtube.com/embed/1-SJGQ2HLp8" title="Food Video" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="overlay">
+    <div class="container py-4">
+      <h2 class="text-center">Contact Us</h2>
+      <form class="row g-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="Your Name">
+        </div>
+        <div class="col-md-6">
+          <input type="email" class="form-control" placeholder="Your Email">
+        </div>
+        <div class="col-12">
+          <textarea class="form-control" placeholder="Your Message" rows="4"></textarea>
+        </div>
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 DelishBites. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const productList = document.getElementById('productList');
+
+    function filterProducts() {
+      const search = searchInput.value.toLowerCase();
+      const products = document.querySelectorAll('.product-card');
+      products.forEach(p => {
+        const name = p.getAttribute('data-name').toLowerCase();
+        p.style.display = name.includes(search) ? 'block' : 'none';
+      });
+    }
+
+    function sortProducts() {
+      const criteria = sortSelect.value;
+      const products = Array.from(document.querySelectorAll('.product-card'));
+      const sorted = products.sort((a, b) => {
+        if (criteria === 'name') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        } else if (criteria === 'price') {
+          return parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price'));
+        }
+        return 0;
+      });
+      sorted.forEach(p => productList.appendChild(p));
+    }
+
+    searchInput.addEventListener('input', filterProducts);
+    sortSelect.addEventListener('change', sortProducts);
+  </script>
+</body>
+</html>
